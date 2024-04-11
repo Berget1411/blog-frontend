@@ -1,9 +1,20 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
-import './index.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Home from './pages/Home';
+import Layout from './components/Layout';
 
 function App() {
-  return <></>;
+  const router = createBrowserRouter([
+    {
+      element: <Layout />,
+      children: [
+        {
+          path: '/',
+          element: <Home />,
+        },
+      ],
+    },
+  ]);
+  return <RouterProvider router={router} />;
 }
 
 export default App;

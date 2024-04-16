@@ -54,8 +54,8 @@ const Nav = ({ location }) => {
             className='group flex cursor-pointer items-center justify-center rounded-3xl bg-white p-2 md:hidden'
           >
             <div className='space-y-2'>
-              <span className='block h-1 w-8 origin-center rounded-full bg-slate-500 transition-transform ease-in-out group-hover:translate-y-1.5 group-hover:rotate-45'></span>
-              <span className='block h-1 w-8 origin-center rounded-full bg-violet-600 transition-transform ease-in-out group-hover:w-8 group-hover:-translate-y-1.5 group-hover:-rotate-45'></span>
+              <span className='block h-1 w-8 origin-center rounded-full bg-slate-500 transition-transform ease-in-out group-active:translate-y-1.5 group-active:rotate-45'></span>
+              <span className='block h-1 w-8 origin-center rounded-full bg-violet-600 transition-transform ease-in-out group-active:w-8 group-active:-translate-y-1.5 group-active:-rotate-45'></span>
             </div>
           </button>
         </div>

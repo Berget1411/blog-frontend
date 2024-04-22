@@ -4,6 +4,7 @@ import { navLinks } from '../constants';
 import { twJoin } from 'tailwind-merge';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 import HamburgerContent from './HamburgerContent';
+import Button from './Button';
 
 const Nav = ({ location }) => {
   const [hamburgerActive, setHamburgerActive] = useState(false);
@@ -14,7 +15,7 @@ const Nav = ({ location }) => {
   }, [width]);
 
   return (
-    <header className='padding-x py-8 z-20 w-full absolute '>
+    <header className='padding-x py-8 z-20 w-full absolute bg-amber-50 shadow-md'>
       <nav className='flex justify-between items-center max-container flex-wrap'>
         <Link to='/' className='group transition-all'>
           <h1 className='text-3xl font-bold font-palanquin'>
@@ -42,9 +43,10 @@ const Nav = ({ location }) => {
           ))}
         </ul>
         <div className='flex gap-7 '>
-          <Link className='text-white font-bold text-lg bg-violet-600 rounded-2xl px-8 py-2 round transition-all hover:bg-violet-500 '>
-            Sign in
-          </Link>
+          <Button>
+            <Link>Sign in</Link>
+          </Button>
+
           <button
             onClick={() =>
               hamburgerActive === false

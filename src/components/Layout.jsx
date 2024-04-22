@@ -1,6 +1,7 @@
 import { usePosts } from '../context/postsContext';
 import { Outlet, useLocation } from 'react-router-dom';
 import Nav from './Nav';
+import Footer from './Footer';
 
 const Layout = () => {
   const { error, loading } = usePosts();
@@ -15,7 +16,7 @@ const Layout = () => {
       <main>
         <Outlet />
       </main>
-      <footer>Footer</footer>
+      <Footer />
     </>
   );
 };

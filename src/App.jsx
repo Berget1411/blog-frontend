@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import PostsProvider from './context/postsContext';
-import Home from './pages/Home';
+import { Home, Articles } from './pages/';
 import Layout from './components/Layout';
 
 function App() {
@@ -11,6 +11,10 @@ function App() {
         {
           path: '/',
           element: <Home />,
+        },
+        {
+          path: '/articles',
+          element: <Articles />,
         },
       ],
     },

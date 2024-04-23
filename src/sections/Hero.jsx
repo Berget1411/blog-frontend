@@ -5,10 +5,12 @@ import heroImage from '../assets/images/hero-image.jpg';
 
 const Hero = () => {
   return (
-    <div className='flex justify-between items-center gap-10 pl-6 max-container max-md:flex-col-reverse bg-amber-50 rounded-r-[5rem] rounded-bl-[5rem] shadow-2xl  '>
+    <div className='flex justify-between items-center max-container max-md:flex-col-reverse gap-10 surface rounded-r-[5rem] rounded-bl-[5rem] px-8 py-10  '>
       <div>
-        <h1 className='text-4xl font-palanquin '>Stay up to date with tech </h1>
-        <p className='text-slate-gray text-lg py-4'>
+        <h1 className='text-slate-900 dark:text-white font-palanquin text-4xl'>
+          Stay up to date with tech{' '}
+        </h1>
+        <p className='info-color text-lg py-4'>
           In this blog you will discover latest news on everything happening in
           the tech industry, with just a few clicks
         </p>

@@ -5,8 +5,9 @@ import { twJoin } from 'tailwind-merge';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 import HamburgerContent from './HamburgerContent';
 import Button from './Button';
+import { SunIcon, MoonIcon, Bars3Icon } from '@heroicons/react/24/solid';
 
-const Nav = ({ location }) => {
+const Nav = ({ location, toggleDarkMode, darkMode }) => {
   const [hamburgerActive, setHamburgerActive] = useState(false);
   const { width } = useWindowDimensions();
 
@@ -15,26 +16,24 @@ const Nav = ({ location }) => {
   }, [width]);
 
   return (
-    <header className='padding-x py-8 z-20 w-full absolute bg-amber-50 shadow-md'>
-      <nav className='flex justify-between items-center max-container flex-wrap'>
-        <Link to='/' className='group transition-all'>
-          <h1 className='text-3xl font-bold font-palanquin'>
+    <header className='padding-x pt-3 z-20 w-full absolute md:border-b-2 '>
+      <nav className='flex justify-between items-center flex-wrap py-3 max-md:border-b-2 '>
+        <Link to='/' className=' transition-all'>
+          <h1 className='text-3xl font-bold font-palanquin dark:text-white'>
             Blog
-            <span className='text-violet-600 group-hover:text-violet-500 transition-all'>
-              API
-            </span>
+            <span className='primary-color '>API</span>
           </h1>
         </Link>
-        <ul className='flex-1 flex justify-center items-center gap-16 max-md:hidden'>
+        <ul className='flex-1 flex justify-center items-center gap-12 max-md:hidden'>
           {navLinks.map((link) => (
             <li key={link.label}>
               <Link
                 to={link.location}
                 className={twJoin(
-                  'text-xl font-montserrat transition-all',
+                  'text-xl font-montserrat transition-text',
                   link.location === location
-                    ? 'text-violet-600 font-bold underline underline-offset-4 decoration-2'
-                    : 'text-slate-gray hover:text-slate-400'
+                    ? 'primary-color font-bold underline underline-offset-4 decoration-2'
+                    : 'text-slate-400 hover:text-slate-300 dark:slate-300 dark:hover-slate-200'
                 )}
               >
                 {link.label}
@@ -42,24 +41,26 @@ const Nav = ({ location }) => {
             </li>
           ))}
         </ul>
-        <div className='flex gap-7 '>
+        <div className='flex items-center gap-4  '>
           <Button>
             <Link>Sign in</Link>
           </Button>
+          <button onClick={toggleDarkMode}>
+            {darkMode ? (
+              <MoonIcon className='h-8 w-8 secondary-color' />
+            ) : (
+              <SunIcon className='h-8 w-8 secondary-color' />
+            )}
+          </button>
 
-          <button
+          <Bars3Icon
+            className='w-8 h-8 primary-color rounded-full md:hidden cursor-pointer'
             onClick={() =>
               hamburgerActive === false
                 ? setHamburgerActive(true)
                 : setHamburgerActive(false)
             }
-            className='group flex cursor-pointer items-center justify-center rounded-3xl bg-white p-2 md:hidden'
-          >
-            <div className='space-y-2'>
-              <span className='block h-1 w-8 origin-center rounded-full bg-slate-500 transition-transform ease-in-out group-active:translate-y-1.5 group-active:rotate-45'></span>
-              <span className='block h-1 w-8 origin-center rounded-full bg-violet-600 transition-transform ease-in-out group-active:w-8 group-active:-translate-y-1.5 group-active:-rotate-45'></span>
-            </div>
-          </button>
+          />
         </div>
         <HamburgerContent
           location={location}

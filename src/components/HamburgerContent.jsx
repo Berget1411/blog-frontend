@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { navLinks } from '../constants';
 import { AnimatePresence, motion } from 'framer-motion';
 import { twJoin } from 'tailwind-merge';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 const HamburgerContent = ({
   location,
@@ -18,25 +19,21 @@ const HamburgerContent = ({
             animate={{ x: '0' }}
             exit={{ x: '100%' }}
             transition={{ bounce: false }}
-            className='z-50 fixed top-0 right-0 bg-white h-full w-full max-w-xs py-2 px-5'
+            className='z-50 fixed top-0 right-0 background h-full w-full max-w-xs py-2 px-5'
           >
-            <div className='flex justify-between items-center py-3 mb-8 border-b-[3px] border-slate'>
-              <h1 className='text-2xl font-bold font-palanquin'>
-                Blog<span className='text-violet-600'>API</span>
+            <div className='flex justify-between items-center py-6 mb-8 border-b-2'>
+              <h1 className='dark:text-white text-2xl font-bold font-palanquin'>
+                Blog<span className='primary-color'>API</span>
               </h1>
-              <button
+
+              <XMarkIcon
+                className='w-8 h-8 primary-color rounded-full md:hidden cursor-pointer'
                 onClick={() =>
                   hamburgerActive === false
                     ? setHamburgerActive(true)
                     : setHamburgerActive(false)
                 }
-                className='flex cursor-pointer items-center justify-center rounded-3xl bg-white p-2 md:hidden'
-              >
-                <div className='space-y-2'>
-                  <span className='block h-1 w-7 origin-center rounded-full bg-slate-500 transition-transform ease-in-out translate-y-1.5 rotate-45'></span>
-                  <span className='block h-1 w-7 origin-center rounded-full bg-violet-600 transition-transform ease-in-out  -translate-y-1.5 -rotate-45'></span>
-                </div>
-              </button>
+              />
             </div>
             <ul className='flex flex-col justify-center  gap-16 '>
               {navLinks.map((link) => (
@@ -46,8 +43,8 @@ const HamburgerContent = ({
                     className={twJoin(
                       'text-xl font-montserrat transition-all',
                       link.location === location
-                        ? 'text-violet-600 font-bold underline underline-offset-4 decoration-2'
-                        : 'text-slate-gray hover:text-slate-400'
+                        ? 'primary-color font-bold underline underline-offset-4 decoration-2'
+                        : 'text-slate-400 hover:text-slate-300 dark:slate-300 dark:hover-slate-200'
                     )}
                   >
                     {link.label}

@@ -7,7 +7,7 @@ const SmallCard = ({ post, useShadow }) => {
     <Link
       to={`/articles/${post._id}`}
       className={twJoin(
-        'p-2 rounded-xl cursor-pointer bg-amber-50 hover:bg-amber-100 transition-all',
+        'surface px-6 py-8 rounded-xl cursor-pointer  hover:bg-[rgba(255,255,255,0.1)] transition-all',
         useShadow && 'shadow-2xl'
       )}
     >
@@ -17,12 +17,14 @@ const SmallCard = ({ post, useShadow }) => {
         className=' rounded-xl mb-2 w-full'
       />
 
-      <p className=' bg-violet-200 inline px-4 rounded-xl font-bold text-sm'>
+      <p className=' secondary-bg inline px-4 rounded-xl font-bold text-sm max-sm:hidden'>
         {post.category}
       </p>
 
-      <h3 className='text-xl font-bold py-1 font-palanquin'>{post.title}</h3>
-      <p className='text-slate-gray text-sm pb-5 font-montserrat'>
+      <h3 className='dark:text-white text-xl font-bold py-1 font-palanquin'>
+        {post.title}
+      </h3>
+      <p className='info-color text-sm pb-5 font-montserrat'>
         {post.text.slice(0, 50)}
       </p>
     </Link>

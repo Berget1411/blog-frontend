@@ -4,7 +4,7 @@ import gitHub from '../assets/images/github.svg';
 
 const Footer = () => {
   return (
-    <footer className='padding-x mt-14 border-t-2 '>
+    <footer className='padding-x  border-t-2 '>
       <Link to='/' className=' '>
         <h1 className='dark:text-white text-3xl font-bold font-palanquin max-md: pt-8 pb-4'>
           Blog

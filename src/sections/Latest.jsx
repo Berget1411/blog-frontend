@@ -6,7 +6,7 @@ const Latest = () => {
   const { posts } = usePosts();
   const sortedPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
   return (
-    <div>
+    <div className='padding-y'>
       <h2 className='text-2xl font-palanquin pt-10 secondary-color font-bold'>
         Latest articles
       </h2>

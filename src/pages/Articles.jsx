@@ -54,18 +54,22 @@ const Articles = () => {
         date={date}
         setDate={setDate}
       />
-      <motion.ul
-        className=' grid-cols-2'
-        variants={container}
-        initial='hidden'
-        animate='visible'
-      >
-        {filteredPosts.map((post) => (
-          <motion.li key={post._id} variants={item}>
-            <BigCard post={post} />
-          </motion.li>
-        ))}
-      </motion.ul>
+      {filteredPosts.length > 0 ? (
+        <motion.ul
+          className=' grid-cols-2'
+          variants={container}
+          initial='hidden'
+          animate='visible'
+        >
+          {filteredPosts.map((post) => (
+            <motion.li key={post._id} variants={item}>
+              <BigCard post={post} />
+            </motion.li>
+          ))}
+        </motion.ul>
+      ) : (
+        <p className='info-color text-xl text-center '>No matching posts</p>
+      )}
     </div>
   );
 };

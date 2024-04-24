@@ -23,10 +23,12 @@ const Layout = () => {
           toggleDarkMode={toggleDarkMode}
           darkMode={darkMode}
         />
-        <main>
+        <main className='min-h-[calc(100vh-319px)]'>
           <Outlet />
         </main>
-        <Footer />
+        <section>
+          <Footer />
+        </section>
       </div>
     </div>
   );

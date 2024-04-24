@@ -44,7 +44,7 @@ const Articles = () => {
   };
 
   return (
-    <div className='pt-40 padding-x'>
+    <div className='pt-40 padding-x max-container'>
       <Filter
         posts={posts}
         search={search}
@@ -55,7 +55,7 @@ const Articles = () => {
         setDate={setDate}
       />
       <motion.ul
-        className='padding-x grid-cols-2'
+        className=' grid-cols-2'
         variants={container}
         initial='hidden'
         animate='visible'

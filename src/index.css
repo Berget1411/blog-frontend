@@ -48,10 +48,10 @@
     @apply sm:pb-24 pb-12;
   }
   .background {
-    @apply bg-white dark:bg-slate-900;
+    @apply bg-white dark:bg-slate-950;
   }
   .surface {
-    @apply bg-white dark:bg-[rgba(255,255,255,0.05)] ring-1 ring-slate-900/5 shadow-xl;
+    @apply bg-white dark:bg-slate-900 ring-1 ring-slate-900/5 shadow-xl;
   }
   .primary-color {
     @apply text-purple-700 dark:text-purple-300;
@@ -67,5 +67,11 @@
   }
   .info-color {
     @apply text-slate-500 dark:text-slate-300;
+  }
+  .input {
+    @apply bg-transparent h-10  placeholder-transparent rounded-lg info-color ring-2 px-2 ring-gray-500 ring-slate-500 dark:ring-slate-300 focus:ring-purple-700 dark:focus:ring-purple-300 focus:outline-none focus:invalid:border-rose-600 transition-all;
+  }
+  .input-label {
+    @apply absolute z-20 cursor-text info-color left-0 -top-3 text-sm bg-white dark:bg-slate-900 mx-1 px-1 peer-placeholder-shown:text-base peer-placeholder-shown:text-slate-500 dark:peer-placeholder-shown:text-slate-300 peer-placeholder-shown:top-2 peer-focus:-top-3 peer-focus:text-purple-700 dark:peer-focus:text-purple-300 peer-focus:text-sm transition-all;
   }
 }

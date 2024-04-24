@@ -12,9 +12,9 @@ const Articles = () => {
 
   const sortedPosts = () => {
     if (date === 'latest') {
-      return posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+      return posts.toSorted((a, b) => new Date(b.date) - new Date(a.date));
     } else {
-      return posts.sort((a, b) => new Date(a.date) - new Date(b.date));
+      return posts.toSorted((a, b) => new Date(a.date) - new Date(b.date));
     }
   };
 

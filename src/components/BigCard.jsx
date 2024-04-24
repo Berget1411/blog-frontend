@@ -2,6 +2,7 @@ import Button from './Button';
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import noImage from '../assets/images/no_image.png';
+import { convertString } from '../hooks/helpers';
 
 const BigCard = ({ post }) => {
   return (
@@ -30,7 +31,7 @@ const BigCard = ({ post }) => {
           <p className='info-color text-md pb-5 font-montserrat'>
             {post.text.slice(0, 150)}
           </p>
-          <Link to={`/articles/${post._id}`}>
+          <Link to={`/articles/${convertString(post.title)}`}>
             <Button>Read Article</Button>
           </Link>
         </div>

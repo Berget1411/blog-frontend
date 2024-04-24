@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
+import { convertString } from '../hooks/helpers';
 
 const TinyCard = ({ post }) => {
   return (
     <Link
-      to={`/articles/${post._id}`}
+      to={`/articles/${convertString(post.title)}`}
       className='flex gap-5 surface px-3 py-4 rounded-lg hover:bg-[rgba(255,255,255,0.1)]  transition-all'
     >
       <img src={post.image} alt='' className=' rounded-xl mb-2 h-20  ' />

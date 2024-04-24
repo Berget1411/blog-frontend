@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import noImage from '../assets/images/no_image.png';
 import { twJoin } from 'tailwind-merge';
+import { convertString } from '../hooks/helpers';
 
 const SmallCard = ({ post, useShadow }) => {
   return (
     <Link
-      to={`/articles/${post._id}`}
+      to={`/articles/${convertString(post.title)}`}
       className={twJoin(
         'surface px-6 py-8 rounded-xl cursor-pointer  hover:bg-[rgba(255,255,255,0.1)] transition-all',
         useShadow && 'shadow-2xl'

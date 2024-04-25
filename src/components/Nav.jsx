@@ -6,10 +6,12 @@ import useWindowDimensions from '../hooks/useWindowDimensions';
 import HamburgerContent from './HamburgerContent';
 import Button from './Button';
 import { SunIcon, MoonIcon, Bars3Icon } from '@heroicons/react/24/solid';
+import { useUser } from '../context/userContext';
 
 const Nav = ({ location, toggleDarkMode, darkMode }) => {
   const [hamburgerActive, setHamburgerActive] = useState(false);
   const { width } = useWindowDimensions();
+  const { currentUsername, logoutUser } = useUser();
 
   useEffect(() => {
     width >= 768 && setHamburgerActive(false);
@@ -42,9 +44,13 @@ const Nav = ({ location, toggleDarkMode, darkMode }) => {
           ))}
         </ul>
         <div className='flex items-center gap-4  '>
-          <Button>
-            <Link>Sign in</Link>
-          </Button>
+          {!currentUsername ? (
+            <Button>
+              <Link to='/sign-in'>Sign in</Link>
+            </Button>
+          ) : (
+            <Button event={logoutUser}>Sign out</Button>
+          )}
           <button onClick={toggleDarkMode}>
             {darkMode ? (
               <MoonIcon className='h-8 w-8 secondary-color' />

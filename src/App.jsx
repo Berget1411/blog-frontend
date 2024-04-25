@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import PostsProvider from './context/postsContext';
+import { PostsProvider, UserProvider } from './context/';
 import { Home, Articles, ArticlePage } from './pages/';
 import Layout from './components/Layout';
+import SignIn from './pages/SignIn';
 
 function App() {
   const router = createBrowserRouter([
@@ -20,13 +21,20 @@ function App() {
           path: 'articles/:postTitle',
           element: <ArticlePage />,
         },
+        {
+          path: '/sign-in',
+          element: <SignIn />,
+        },
       ],
     },
   ]);
+
   return (
-    <PostsProvider>
-      <RouterProvider router={router} />
-    </PostsProvider>
+    <UserProvider>
+      <PostsProvider>
+        <RouterProvider router={router} />
+      </PostsProvider>
+    </UserProvider>
   );
 }
 

@@ -21,6 +21,10 @@
     max-width: 1000px;
     margin: 0 auto;
   }
+  .small-container {
+    max-width: 448px;
+    margin: 0 auto;
+  }
 }
 
 @layer utilities {

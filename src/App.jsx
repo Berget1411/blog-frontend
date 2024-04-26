@@ -1,10 +1,12 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { PostsProvider, UserProvider } from './context/';
 import { Home, Articles, ArticlePage } from './pages/';
 import Layout from './components/Layout';
 import SignIn from './pages/SignIn';
+import { useSession } from './context/sessionContext';
+import { Navigate } from 'react-router-dom';
 
 function App() {
+  const { currentUsername } = useSession();
   const router = createBrowserRouter([
     {
       element: <Layout />,
@@ -23,19 +25,13 @@ function App() {
         },
         {
           path: '/sign-in',
-          element: <SignIn />,
+          element: currentUsername ? <Navigate to='/' /> : <SignIn />,
         },
       ],
     },
   ]);
 
-  return (
-    <UserProvider>
-      <PostsProvider>
-        <RouterProvider router={router} />
-      </PostsProvider>
-    </UserProvider>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default App;

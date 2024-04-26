@@ -1,9 +1,9 @@
 import { createContext, useContext, useState } from 'react';
 
-const UserContext = createContext();
-export const useUser = () => useContext(UserContext);
+const SessionContext = createContext();
+export const useSession = () => useContext(SessionContext);
 
-const UserProvider = ({ children }) => {
+const SessionProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem('accessToken')
   );
@@ -11,14 +11,14 @@ const UserProvider = ({ children }) => {
     localStorage.getItem('username')
   );
 
-  const loginUser = (accessToken, username) => {
+  const startSession = (accessToken, username) => {
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('username', username);
     setAccessToken(localStorage.getItem('accessToken'));
     setCurrentUsername(localStorage.getItem('username'));
   };
 
-  const logoutUser = () => {
+  const endSession = () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('username');
     setAccessToken(localStorage.getItem('accessToken'));
@@ -28,11 +28,13 @@ const UserProvider = ({ children }) => {
   const value = {
     accessToken,
     currentUsername,
-    loginUser,
-    logoutUser,
+    startSession,
+    endSession,
   };
 
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+  return (
+    <SessionContext.Provider value={value}>{children}</SessionContext.Provider>
+  );
 };
 
-export default UserProvider;
+export default SessionProvider;

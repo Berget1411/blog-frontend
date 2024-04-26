@@ -1,4 +1,4 @@
 import PostsProvider from './postsContext';
-import UserProvider from './userContext';
+import SessionProvider from './sessionContext';
 
-export { PostsProvider, UserProvider };
+export { PostsProvider, SessionProvider };

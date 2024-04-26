@@ -1,14 +1,16 @@
 import Button from '../components/Button';
 import { useState } from 'react';
 import axios from 'axios';
-import { useUser } from '../context/userContext';
+import { useSession } from '../context/sessionContext';
+import { Navigate, redirect, useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
   const [error, setError] = useState();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { loginUser } = useUser();
+  const { startSession } = useSession();
+  const navigate = useNavigate;
 
   const [loginStatus, setLoginStatus] = useState(false);
 
@@ -20,11 +22,9 @@ const SignIn = () => {
         password,
       });
       if (!res.data.auth) {
-        console.log('lol');
         setLoginStatus(false);
       } else {
-        loginUser(res.data.accessToken, res.data.result.username);
-
+        startSession(res.data.accessToken, res.data.result.username);
         setLoginStatus(true);
       }
     } catch (err) {
@@ -56,7 +56,7 @@ const SignIn = () => {
             <input
               type='password'
               id='password'
-              name='username'
+              name='password'
               placeholder=''
               className='peer input w-full'
               onChange={(e) => setPassword(e.target.value)}

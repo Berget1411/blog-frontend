@@ -6,12 +6,12 @@ import useWindowDimensions from '../hooks/useWindowDimensions';
 import HamburgerContent from './HamburgerContent';
 import Button from './Button';
 import { SunIcon, MoonIcon, Bars3Icon } from '@heroicons/react/24/solid';
-import { useUser } from '../context/userContext';
+import { useSession } from '../context/sessionContext';
 
 const Nav = ({ location, toggleDarkMode, darkMode }) => {
   const [hamburgerActive, setHamburgerActive] = useState(false);
   const { width } = useWindowDimensions();
-  const { currentUsername, logoutUser } = useUser();
+  const { currentUsername, endSession } = useSession();
 
   useEffect(() => {
     width >= 768 && setHamburgerActive(false);
@@ -49,7 +49,7 @@ const Nav = ({ location, toggleDarkMode, darkMode }) => {
               <Link to='/sign-in'>Sign in</Link>
             </Button>
           ) : (
-            <Button event={logoutUser}>Sign out</Button>
+            <Button event={endSession}>Sign out</Button>
           )}
           <button onClick={toggleDarkMode}>
             {darkMode ? (

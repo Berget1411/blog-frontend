@@ -1,12 +1,42 @@
-import { UserCircleIcon, TrashIcon } from '@heroicons/react/24/solid';
+import {
+  UserCircleIcon,
+  TrashIcon,
+  PencilIcon,
+  CheckIcon,
+} from '@heroicons/react/24/solid';
 import { format } from 'date-fns';
 import { useSession } from '../context/sessionContext';
 import axios from 'axios';
 import { usePosts } from '../context/postsContext';
+import { useState } from 'react';
+import { twJoin } from 'tailwind-merge';
 
 const UserComment = ({ comment, post }) => {
   const { currentUsername, accessToken } = useSession();
   const { fetchPosts } = usePosts();
+  const [editActive, setEditActive] = useState(false);
+  const [edit, setEdit] = useState(comment.comment);
+
+  const submitEdit = async () => {
+    try {
+      const res = await axios.put(
+        `http://localhost:3000/comments`,
+        {
+          updatedComment: edit,
+          postId: post._id,
+          commentId: comment._id,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      fetchPosts();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const deleteComment = async () => {
     try {
@@ -23,6 +53,7 @@ const UserComment = ({ comment, post }) => {
           },
         }
       );
+
       fetchPosts();
     } catch (err) {
       console.log(err);
@@ -43,15 +74,46 @@ const UserComment = ({ comment, post }) => {
             </span>
           </p>
         </div>
-        <p className='dark:text-white'>{comment.comment}</p>
+        {editActive ? (
+          <textarea
+            className='border-[3px] border-black rounded-lg'
+            onChange={(e) => setEdit(e.target.value)}
+          >
+            {edit}
+          </textarea>
+        ) : (
+          <p className='dark:text-white'>{comment.comment}</p>
+        )}
       </div>
 
       {currentUsername === comment.username && (
-        <div
-          onClick={deleteComment}
-          className='border-[3px] p-2 rounded-full border-purple-700 dark:border-purple-300 hover:border-purple-600 dark:hover:border-purple-200  transition-all'
-        >
-          <TrashIcon className='w-5 h-5 primary-color cursor-pointer hover:text-purple-600 dark:hover:text-purple-200 transition-all ' />
+        <div className='flex gap-4'>
+          <div
+            className={twJoin(
+              'border-[3px] p-2 rounded-xl border-purple-700 dark:border-purple-300 hover:border-purple-600 dark:hover:border-purple-200 transition-all cursor-pointer',
+              editActive && 'border-teal-400 hover:border-teal-300 '
+            )}
+            onClick={() => {
+              if (editActive) {
+                submitEdit();
+                setEditActive(false);
+              } else {
+                setEditActive(true);
+              }
+            }}
+          >
+            {editActive ? (
+              <CheckIcon className='w-5 h-5 secondary-color hover:border-teal-300  ' />
+            ) : (
+              <PencilIcon className='w-5 h-5 primary-color  hover:text-purple-600 dark:hover:text-purple-200 transition-all ' />
+            )}
+          </div>
+          <div
+            onClick={deleteComment}
+            className='border-[3px] p-2 rounded-xl border-purple-700 dark:border-purple-300 hover:border-purple-600 dark:hover:border-purple-200  transition-all cursor-pointer'
+          >
+            <TrashIcon className='w-5 h-5 primary-color  hover:text-purple-600 dark:hover:text-purple-200 transition-all ' />
+          </div>
         </div>
       )}
     </li>

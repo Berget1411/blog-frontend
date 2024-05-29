@@ -16,6 +16,12 @@ const SessionProvider = ({ children }) => {
     localStorage.setItem('username', username);
     setAccessToken(localStorage.getItem('accessToken'));
     setCurrentUsername(localStorage.getItem('username'));
+    setTimeout(() => {
+      endSession();
+      alert(
+        'Your session has expired. Please log in again to continue using the app'
+      );
+    }, 999 * 1000);
   };
 
   const endSession = () => {

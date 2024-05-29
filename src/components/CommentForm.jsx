@@ -37,6 +37,7 @@ const CommentForm = ({ post }) => {
         placeholder='Write a comment...'
         className='w-full h-44 surface info-color p-4 rounded-lg '
         onChange={(e) => setComment(e.target.value)}
+        disabled={!accessToken}
       ></textarea>
       <p className='text-slate-500 dark:text-slate-300  text-end my-4'>
         {400 - comment.length} letters remaining

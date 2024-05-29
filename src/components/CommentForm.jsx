@@ -42,7 +42,9 @@ const CommentForm = ({ post }) => {
       <p className='text-slate-500 dark:text-slate-300  text-end my-4'>
         {400 - comment.length} letters remaining
       </p>
-      <Button type='submit'>Post a comment</Button>
+      <Button type={'submit'} disabled={!accessToken}>
+        Post a comment
+      </Button>
     </form>
   );
 };

@@ -1,43 +1,39 @@
 import Button from '../components/Button';
-import { useState } from 'react';
+import { redirect, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useSession } from '../context/sessionContext';
-import { Link } from 'react-router-dom';
 
-const SignIn = () => {
-  const [error, setError] = useState();
-
+const SignUp = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { startSession } = useSession();
-
-  const [loginStatus, setLoginStatus] = useState(false);
+  const [error, setError] = useState();
+  const navigate = useNavigate();
+  const [registered, setRegistered] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/login', {
+      const res = await axios.post('http://localhost:3000/register', {
         username,
         password,
       });
-      if (!res.data.auth) {
-        setLoginStatus(false);
-      } else {
-        startSession(res.data.accessToken, res.data.result.username);
-        setLoginStatus(true);
-      }
+      navigate('/sign-in');
     } catch (err) {
       setError(err);
     }
   };
-
   return (
     <section className=' padding-x pt-40'>
       <div className=' small-container surface px-10 py-12 rounded-lg'>
         <h2 className='dark:text-white text-2xl font-bold mb-6'>
-          Sign in to your account
+          Create an account
         </h2>
-        <form onSubmit={handleSubmit} className=' grid gap-6'>
+        <form
+          onSubmit={(e) => {
+            handleSubmit(e);
+          }}
+          className=' grid gap-6'
+        >
           <div className='relative'>
             <input
               type='text'
@@ -65,21 +61,12 @@ const SignIn = () => {
             </label>
           </div>
           <Button full={true} type='submit'>
-            Sign In
+            Sign up
           </Button>
-          <p className='info-color'>
-            Don't have an account?{' '}
-            <Link
-              to={'/sign-up'}
-              className='font-bold primary-color hover:text-purple-600 dark:hover:text-purple-200 transition-all'
-            >
-              Sign up
-            </Link>
-          </p>
         </form>
       </div>
     </section>
   );
 };
 
-export default SignIn;
+export default SignUp;

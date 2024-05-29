@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { Home, Articles, ArticlePage } from './pages/';
 import Layout from './components/Layout';
 import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 import { useSession } from './context/sessionContext';
 import { Navigate } from 'react-router-dom';
 
@@ -26,6 +27,10 @@ function App() {
         {
           path: '/sign-in',
           element: currentUsername ? <Navigate to='/' /> : <SignIn />,
+        },
+        {
+          path: '/sign-up',
+          element: currentUsername ? <Navigate to='/' /> : <SignUp />,
         },
       ],
     },

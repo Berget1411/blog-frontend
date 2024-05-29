@@ -8,7 +8,7 @@ const PostsProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchPosts = () => {
     fetch('http://localhost:3000/posts')
       .then((res) => {
         if (res.status >= 400) {
@@ -19,9 +19,13 @@ const PostsProvider = ({ children }) => {
       .then((data) => setPosts(data))
       .catch((err) => setError(err))
       .finally(() => setLoading(false));
+  };
+
+  useEffect(() => {
+    fetchPosts();
   }, []);
 
-  const value = { posts, error, loading };
+  const value = { posts, error, loading, fetchPosts };
 
   return (
     <PostsContext.Provider value={value}>{children}</PostsContext.Provider>

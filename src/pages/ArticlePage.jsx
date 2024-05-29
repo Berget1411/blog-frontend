@@ -3,17 +3,21 @@ import { useParams } from 'react-router-dom';
 import profileImage from '../assets/images/profile.png';
 import { format } from 'date-fns';
 import { convertString } from '../hooks/helpers';
-import Button from '../components/Button';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import UserComment from '../components/UserComment';
+import CommentForm from '../components/CommentForm';
+import { useSession } from '../context/sessionContext';
 
 const ArticlePage = () => {
-  const [comment, setComment] = useState('');
+  const { accessToken } = useSession();
+
   const { posts } = usePosts();
   const { postTitle } = useParams();
   const [post] = posts.filter(
     (post) => convertString(post.title) === postTitle
+  );
+  const sortedComments = post.comments.toSorted(
+    (a, b) => new Date(b.date) - new Date(a.date)
   );
 
   return (
@@ -54,32 +58,30 @@ const ArticlePage = () => {
         <p className='secondary-color font-bold mt-6 mb-14'>
           # {post.category}
         </p>
-        <h3 className='text-2xl font-bold dark:text-white'>
+        <h3 className='mb-8 text-2xl font-bold dark:text-white'>
           Discussion ({post.comments.length})
         </h3>
-        <p className='py-3 mt-8 mb-4 text-center bg-rose-300 rounded-lg'>
-          <Link to='/sign-in' className='font-bold underline'>
-            Sign in{' '}
-          </Link>
-          to post a comment
-        </p>
-        <form action=''>
-          <textarea
-            placeholder='Write a comment...'
-            className='w-full h-44 surface info-color p-4 rounded-lg '
-            onChange={(e) => setComment(e.target.value)}
-          ></textarea>
-          <p className='text-slate-500 dark:text-slate-300  text-end my-4'>
-            {400 - comment.length} letters remaining
+        {!accessToken && (
+          <p className='py-3 text-center bg-rose-300 rounded-lg'>
+            <Link to='/sign-in' className='font-bold underline'>
+              Sign in{' '}
+            </Link>
+            to post a comment
           </p>
-          <Button>Post a comment</Button>
-        </form>
+        )}
+        <CommentForm post={post} />
       </div>
-      <ul className='mt-10 flex flex-col gap-5 px-24ghb'>
-        {post.comments.map((comment) => (
-          <UserComment comment={comment} />
-        ))}
-      </ul>
+      {sortedComments.length ? (
+        <ul className='mt-10 flex flex-col gap-5 px-24 max-sm:padding-x'>
+          {sortedComments.map((comment) => (
+            <UserComment comment={comment} post={post} />
+          ))}
+        </ul>
+      ) : (
+        <p className=' py-12 text-center text-xl font-bold secondary-color'>
+          Be the first to comment.
+        </p>
+      )}
     </section>
   );
 };

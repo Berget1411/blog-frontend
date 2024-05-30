@@ -7,7 +7,7 @@ import { useSession } from './context/sessionContext';
 import { Navigate } from 'react-router-dom';
 
 function App() {
-  const { currentUsername } = useSession();
+  const { accessToken } = useSession();
   const router = createBrowserRouter([
     {
       element: <Layout />,
@@ -26,11 +26,11 @@ function App() {
         },
         {
           path: '/sign-in',
-          element: currentUsername ? <Navigate to='/' /> : <SignIn />,
+          element: accessToken ? <Navigate to='/' /> : <SignIn />,
         },
         {
           path: '/sign-up',
-          element: currentUsername ? <Navigate to='/' /> : <SignUp />,
+          element: accessToken ? <Navigate to='/' /> : <SignUp />,
         },
       ],
     },

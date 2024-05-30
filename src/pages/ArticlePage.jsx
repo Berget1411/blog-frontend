@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import profileImage from '../assets/images/profile.png';
 import { format } from 'date-fns';
 import { convertString } from '../hooks/helpers';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import UserComment from '../components/UserComment';
 import CommentForm from '../components/CommentForm';
 import { useSession } from '../context/sessionContext';
@@ -20,7 +20,7 @@ const ArticlePage = () => {
     (a, b) => new Date(b.date) - new Date(a.date)
   );
 
-  return (
+  return post.is_published ? (
     <section className='pt-40 pb-10 padding-x medium-container font-palanquin'>
       <h2 className=' text-4xl font-bold dark:text-white pb-10 '>
         {post.title}
@@ -83,6 +83,8 @@ const ArticlePage = () => {
         </p>
       )}
     </section>
+  ) : (
+    <Navigate to='/' />
   );
 };
 

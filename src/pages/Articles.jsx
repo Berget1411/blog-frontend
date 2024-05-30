@@ -61,11 +61,14 @@ const Articles = () => {
           initial='hidden'
           animate='visible'
         >
-          {filteredPosts.map((post) => (
-            <motion.li key={post._id} variants={item}>
-              <BigCard post={post} />
-            </motion.li>
-          ))}
+          {filteredPosts.map(
+            (post) =>
+              post.is_published && (
+                <motion.li key={post._id} variants={item}>
+                  <BigCard post={post} />
+                </motion.li>
+              )
+          )}
         </motion.ul>
       ) : (
         <p className='info-color text-xl text-center '>No matching posts</p>

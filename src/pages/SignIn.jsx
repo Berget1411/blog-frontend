@@ -23,7 +23,11 @@ const SignIn = () => {
       if (!res.data.auth) {
         setLoginStatus(false);
       } else {
-        startSession(res.data.accessToken, res.data.result.username);
+        startSession(
+          res.data.accessToken,
+          res.data.result.username,
+          res.data.result.is_admin
+        );
         setLoginStatus(true);
       }
     } catch (err) {

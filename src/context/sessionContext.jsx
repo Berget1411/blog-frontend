@@ -7,15 +7,18 @@ const SessionProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem('accessToken')
   );
-  const [currentUser, setCurrentUser] = useState(
+  const [currentUsername, setCurrentUsername] = useState(
     localStorage.getItem('username')
   );
+  const [admin, setAdmin] = useState(localStorage.getItem('isAdmin'));
 
-  const startSession = (accessToken, user) => {
+  const startSession = (accessToken, username, isAdmin) => {
     localStorage.setItem('accessToken', accessToken);
-    localStorage.setItem('user', user);
+    localStorage.setItem('username', username);
+    localStorage.setItem('isAdmin', isAdmin);
     setAccessToken(localStorage.getItem('accessToken'));
-    setCurrentUser(localStorage.getItem('user'));
+    setCurrentUsername(localStorage.getItem('username'));
+    setAdmin(localStorage.getItem('isAdmin'));
     setTimeout(() => {
       endSession();
       alert(
@@ -26,14 +29,17 @@ const SessionProvider = ({ children }) => {
 
   const endSession = () => {
     localStorage.removeItem('accessToken');
-    localStorage.removeItem('user');
+    localStorage.removeItem('username');
+    localStorage.removeItem('isAdmin');
     setAccessToken(localStorage.getItem('accessToken'));
-    setCurrentUser(localStorage.getItem('user'));
+    setCurrentUsername(localStorage.getItem('username'));
+    setAdmin(localStorage.getItem('isAdmin'));
   };
 
   const value = {
     accessToken,
-    currentUser,
+    currentUsername,
+    admin,
     startSession,
     endSession,
   };

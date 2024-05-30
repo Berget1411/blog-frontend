@@ -5,13 +5,18 @@ import { twJoin } from 'tailwind-merge';
 import useWindowDimensions from '../hooks/useWindowDimensions';
 import HamburgerContent from './HamburgerContent';
 import Button from './Button';
-import { SunIcon, MoonIcon, Bars3Icon } from '@heroicons/react/24/solid';
+import {
+  SunIcon,
+  MoonIcon,
+  Bars3Icon,
+  PencilSquareIcon,
+} from '@heroicons/react/24/solid';
 import { useSession } from '../context/sessionContext';
 
 const Nav = ({ location, toggleDarkMode, darkMode }) => {
   const [hamburgerActive, setHamburgerActive] = useState(false);
   const { width } = useWindowDimensions();
-  const { currentUsername, endSession } = useSession();
+  const { admin, accessToken, endSession } = useSession();
 
   useEffect(() => {
     width >= 768 && setHamburgerActive(false);
@@ -44,7 +49,12 @@ const Nav = ({ location, toggleDarkMode, darkMode }) => {
           ))}
         </ul>
         <div className='flex items-center gap-4  '>
-          {!currentUsername ? (
+          {admin && (
+            <Link to={'/edit'}>
+              <PencilSquareIcon className='h-8 w-8 primary-color' />
+            </Link>
+          )}
+          {!accessToken ? (
             <Button>
               <Link to='/sign-in'>Sign in</Link>
             </Button>

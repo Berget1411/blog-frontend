@@ -23,7 +23,7 @@ const CreatePost = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `http://localhost:3000/posts`,
+        `${import.meta.env.VITE_API_URL}/posts`,
         {
           title,
           category,

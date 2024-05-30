@@ -9,7 +9,7 @@ const PostsProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const fetchPosts = () => {
-    fetch('http://localhost:3000/posts')
+    fetch(`${import.meta.env.VITE_API_URL}/posts`)
       .then((res) => {
         if (res.status >= 400) {
           throw new Error('Server Error');

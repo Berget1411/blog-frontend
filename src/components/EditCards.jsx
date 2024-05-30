@@ -26,7 +26,7 @@ const EditCards = ({ post }) => {
   const hidePost = async () => {
     try {
       const res = await axios.put(
-        `http://localhost:3000/posts`,
+        `${import.meta.env.VITE_API_URL}/posts`,
         {
           postId: post._id,
           title,
@@ -51,7 +51,7 @@ const EditCards = ({ post }) => {
   const submitEdit = async () => {
     try {
       const res = await axios.put(
-        `http://localhost:3000/posts`,
+        `${import.meta.env.VITE_API_URL}/posts`,
         {
           postId: post._id,
           title,
@@ -75,7 +75,7 @@ const EditCards = ({ post }) => {
   const deleteProject = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/posts`,
+        `${import.meta.env.VITE_API_URL}/posts`,
 
         {
           data: {

@@ -20,7 +20,7 @@ const UserComment = ({ comment, post }) => {
   const submitEdit = async () => {
     try {
       const res = await axios.put(
-        `http://localhost:3000/comments`,
+        `${import.meta.env.VITE_API_URL}/comments`,
         {
           updatedComment: edit,
           postId: post._id,
@@ -41,7 +41,7 @@ const UserComment = ({ comment, post }) => {
   const deleteComment = async () => {
     try {
       const res = await axios.delete(
-        `http://localhost:3000/comments`,
+        `${import.meta.env.VITE_API_URL}/comments`,
 
         {
           data: {

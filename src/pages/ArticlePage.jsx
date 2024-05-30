@@ -74,7 +74,7 @@ const ArticlePage = () => {
       {sortedComments.length ? (
         <ul className='mt-10 flex flex-col gap-5 px-24 max-sm:padding-x'>
           {sortedComments.map((comment) => (
-            <UserComment comment={comment} post={post} />
+            <UserComment comment={comment} post={post} key={comment._id} />
           ))}
         </ul>
       ) : (

@@ -12,6 +12,13 @@ const CreatePost = () => {
   const [category, setCategory] = useState();
   const [image, setImage] = useState();
 
+  const clearForm = () => {
+    setTitle('');
+    setText('');
+    setCategory('');
+    setImage('');
+  };
+
   const submitPost = async (e) => {
     e.preventDefault();
     try {
@@ -29,8 +36,8 @@ const CreatePost = () => {
           },
         }
       );
-      console.log(res);
       fetchPosts();
+      clearForm();
     } catch (err) {
       console.log(err);
     }
@@ -47,6 +54,7 @@ const CreatePost = () => {
             id='username'
             name='username'
             placeholder=''
+            value={title}
             className='peer input w-full'
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -56,14 +64,15 @@ const CreatePost = () => {
         </div>
         <div className='relative'>
           <input
-            type='password'
-            id='password'
-            name='password'
+            type='category'
+            id='category'
+            name='category'
+            value={category}
             placeholder=''
             className='peer input w-full'
             onChange={(e) => setCategory(e.target.value)}
           />
-          <label htmlFor='password' className='input-label'>
+          <label htmlFor='category' className='input-label'>
             Category
           </label>
         </div>
@@ -72,6 +81,7 @@ const CreatePost = () => {
             name='text'
             id='text'
             placeholder=''
+            value={text}
             className='peer input w-full h-[80px!important]'
             onChange={(e) => setText(e.target.value)}
           ></textarea>
@@ -85,6 +95,7 @@ const CreatePost = () => {
             name='image'
             placeholder=''
             className='peer input w-full'
+            value={image}
             onChange={(e) => setImage(e.target.value)}
           />
           <label htmlFor='image' className='input-label'>

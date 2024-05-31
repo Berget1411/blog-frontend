@@ -49,7 +49,7 @@ const Nav = ({ location, toggleDarkMode, darkMode }) => {
           ))}
         </ul>
         <div className='flex items-center gap-4  '>
-          {admin && (
+          {admin === 'true' && (
             <Link to={'/edit'}>
               <PencilSquareIcon className='h-8 w-8 primary-color' />
             </Link>

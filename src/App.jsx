@@ -35,7 +35,7 @@ function App() {
         },
         {
           path: '/edit',
-          element: !admin ? <Navigate to='/' /> : <Edit />,
+          element: admin !== 'true' ? <Navigate to='/' /> : <Edit />,
         },
       ],
     },
